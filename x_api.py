@@ -14,8 +14,13 @@ def get_mutual_followers():
     x = OAuth1Session(api_key, client_secret=api_secret, resource_owner_key=access_token, resource_owner_secret=access_token_secret)
 
     # Fetch followers (users following you)
-    followers_url = "https://api.x.com/2/users/me/following"
-    following_response = x.get(followers_url, params={'user.fields': 'username'})
+    followers_url = "https://api.x.com/2/users/me/followers"
+    followers_response = x.get(followers_url, params={'user.fields': 'username'})
+    followers = followers_response.json().get('data', [])
+
+    # Fetch following (users you follow)
+    following_url = "https://api.x.com/2/users/me/following"
+    following_response = x.get(following_url, params={'user.fields': 'username'})
     following = following_response.json().get('data', [])
 
     # Find mutual followers
