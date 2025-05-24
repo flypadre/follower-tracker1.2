@@ -6,8 +6,8 @@ from models import db, Followers
 
 load_dotenv()
 app = Flask(__name__)
-app.config.from_object('config.Config')
 
+app.config.from_object('config.Config')
 db.init_app(app)
 
 @app.route('/')
@@ -19,8 +19,8 @@ def check_followers():
     # Fetch new mutual followers
     mutual_followers = get_mutual_followers()
     # Get previous followers from database
-    previous_followers = {f.ussername for f in Follower.query.all()}
-    #Find unfolloweed users
+    previous_followers = {f.username for f in Follower.query.all()}
+    #Find unfollowed users
     new_followers = {f['username'] for f in mutual_followers}
     unfollowed = previous_followers - new_followers
     # Update database
@@ -35,6 +35,6 @@ def check_followers():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        db.create_all() # Create database tables
     app.run(debug=True)
 
