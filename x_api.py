@@ -15,8 +15,8 @@ def get_mutual_followers():
 
     # Fetch followers (users following you)
     followers_url = "https://api.x.com/2/users/me/following"
-    following_response = x.get(following_url, params={'user.fields': 'username'})
-    following = following_response.json().get('data' [])
+    following_response = x.get(followers_url, params={'user.fields': 'username'})
+    following = following_response.json().get('data', [])
 
     # Find mutual followers
     follower_usernames = {f['username'] for f in followers}

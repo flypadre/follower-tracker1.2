@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 import os
 from x_api import get_mutual_followers
-from models import db, Followers
+from models import db, Follower
 
 load_dotenv()
 app = Flask(__name__)
