@@ -14,7 +14,7 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
-@app.route('check_followers', methods=['GET'])
+@app.route('/check_followers', methods=['GET'])
 def check_followers():
     # Fetch new mutual followers
     mutual_followers = get_mutual_followers()
