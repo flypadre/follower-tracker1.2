@@ -16,3 +16,22 @@ function checkFollowers() {
             document.getElementById('results').textContent = 'Error fetching data.';
         });
 }
+
+function fetchFollowers(){
+    fetch('/followers')
+        .then(response => response.json())
+        .then(data => {
+            const resultsDiv = document.getElementById('results');
+            if (data.error) {
+                resultsDiv.textContent = data.error;
+            } else {
+                resultsDiv.innerHTML = '<h2>Recent Followers:</h2><ul>' +
+                    data.map(user => '<li>${user.username}</li>').join('') +
+                    '</ul>'
+            }
+        })
+        .catch(error => {
+            console.error('Error: ', error);
+            document.getElementById('results').textContent = 'Error fetching data.';
+        })
+}

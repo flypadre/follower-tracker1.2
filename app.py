@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 import os
-from x_api import get_mutual_followers
+from x_api import get_mutual_followers, get_five_followers
 from models import db, Follower
 
 load_dotenv()
@@ -32,6 +32,10 @@ def check_followers():
     # Prepare response
     result = {'unfollowed': list(unfollowed), 'no_change': len(unfollowed) == 0}
     return jsonify(result)
+
+@app.route('/followers', methods=['GET'])
+def followers():
+    return jsonify(get_five_followers())
 
 if __name__ == '__main__':
     with app.app_context():
